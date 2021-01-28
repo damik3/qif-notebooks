@@ -1,5 +1,5 @@
 import numpy as np
-from qif import *
+from qif import channel
 
 '''
 Takes as input a channel c and a distribution pi
@@ -10,13 +10,13 @@ with the extra option of highlighting the maximum elements of each column
 def print_hyper(c, pi, highlight_maxima=False):
     h = channel.hyper(c, pi)
     
-    dashes = '-' * (7 * len(h[0]) - 1)
+    dashes = '-' * (10 * len(h[0]) - 1)
     print(dashes)
     
     p_y = h[0]
     print("| ", end='')
     for i in range(len(p_y)):
-        print("%.2f " % p_y[i], end='')
+        print("   %.2f " % p_y[i], end='')
     print("|")
     print(dashes)
 
@@ -25,8 +25,8 @@ def print_hyper(c, pi, highlight_maxima=False):
         print("| ", end='')
         for j in range(len(posteriors[i])):
             if highlight_maxima and posteriors[i][j] == max(np.transpose(posteriors)[j]):
-                print("\033[1m%.2f\033[0m " % posteriors[i][j], end='')
+                print("-->%.2f " % posteriors[i][j], end='')
             else:
-                print("%.2f " % posteriors[i][j], end='')
+                print("   %.2f " % posteriors[i][j], end='')
         print("|")    
     print(dashes)
