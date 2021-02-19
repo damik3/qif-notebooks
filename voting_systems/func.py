@@ -1,4 +1,5 @@
 import numpy as np
+import itertools
 
 
 
@@ -45,3 +46,13 @@ returns: list of lists of integers
 '''
 def get_W(num_voters, num_candidates):
     return np.array([[1 if j == get_winner(get_votes(i, num_voters, num_candidates)) else 0 for j in range(num_candidates)]  for i in range(num_candidates ** num_voters)])
+
+
+
+def g1(vote, voting_combination, num_voters, num_candidates):
+    return int(vote[0] == get_votes(voting_combination, num_voters, num_candidates)[vote[1]])
+
+
+
+def get_G1(num_voters, num_candidates):
+    return np.array([[g1((c, v), i, num_voters, num_candidates) for i in range(num_candidates ** num_voters)] for c,v in itertools.product(range(num_candidates), range(num_voters))])
