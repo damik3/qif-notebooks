@@ -44,3 +44,8 @@ def get_C(num_persons, values, value):
 def get_H(n, m, a):
     return np.array([[get_h(i, j, n, m, a) for j in range(m)] for i in range(n)])
 
+
+def get_worst_epsilon(A):
+    A = np.array(A).transpose()
+    epsilon = [np.log(max(col) / min(col)) for col in A]
+    return max(epsilon)
