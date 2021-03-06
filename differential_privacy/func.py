@@ -45,7 +45,12 @@ def get_H(n, m, a):
     return np.array([[get_h(i, j, n, m, a) for j in range(m)] for i in range(n)])
 
 
-def get_worst_epsilon(A):
+def get_worst_epsilon(A, column=None):
     A = np.array(A).transpose()
-    epsilon = [np.log(max(col) / min(col)) for col in A]
-    return max(epsilon)
+    
+    if column is None:
+        epsilon = [np.log(max(col) / min(col)) for col in A]
+        return max(epsilon)
+    else:
+        epsilon = np.log(max(A[column]) / min(A[column]))
+        return epsilon
